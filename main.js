@@ -1,22 +1,30 @@
 const api = {
-  key: "afaf9f8d48cff6cafd32e23220bcfdbf",
+  key : "dce727bc70baaa880d677d0c223a7457",
+
+  // key: "afaf9f8d48cff6cafd32e23220bcfdbf",
   base: "https://api.openweathermap.org/data/2.5/"
 }
 
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
-function setQuery(evt) {
-  if (evt.keyCode == 13) {
+function setQuery(event) {
+  if (event.keyCode == 13) {
     getResults(searchbox.value);
   }
 }
-
-function getResults (query) {
-  fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-    .then(weather => {
-      return weather.json();
-    }).then(displayResults);
+// function getResults (query) {
+//   fetch(`${api.base}weather?q=${query}&units=metric&appid=${api.key}`)
+//     .then(weather => {
+//       return weather.json();
+//     }).then(displayResults);
+// }    
+async function getResults(query){
+    
+  console.log(`${api.base}weather?q=${query}&units=metric$appid=${api.key}`)
+  var a = await fetch(`${api.base}weather?q=${query}&units=metric&appid=${api.key}`)
+  a=await a.json()
+  displayResults(a)
 }
 
 function displayResults (weather) {
